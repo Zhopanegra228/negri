@@ -1,0 +1,97 @@
+<?php
+
+// Создаем класс для сущности человек
+class Person {
+    public $name;
+    public $surname;
+    public $patronymic;
+    public $birthdate;
+    public $address;
+    public $phone_numbers = array(); // Массив для номеров телефонов
+    
+    // Конструктор класса
+    public function construct($name, $surname, $patronymic, $birthdate, $address) {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->patronymic = $patronymic;
+        $this->birthdate = $birthdate;
+        $this->address = $address;
+    }
+    
+    // Метод для добавления номера телефона
+    public function addPhoneNumber($number) {
+        array_push($this->phone_numbers, $number);
+    }
+}
+
+// Создаем класс для группы людей
+class Group {
+    public $name;
+    public $members = array(); // Массив для людей в группе
+    
+    // Конструктор класса
+    public function construct($name) {
+        $this->name = $name;
+    }
+    
+    // Метод для добавления человека в группу
+    public function addMember($person) {
+        array_push($this->members, $person);
+    }
+}
+
+// Создаем несколько объектов класса Person
+$person1 = new Person("Иван", "Иванов", "Иванович", "01.01.1990", "ул. Пушкина, д.1");
+$person2 = new Person("Петр", "Петров", "Петрович", "02.02.1991", "ул. Лермонтова, д.2");
+$person3 = new Person("Сидор", "Сидоров", "Сидорович", "03.03.1992", "ул. Толстого, д.3");
+
+// Добавляем номера телефонов для каждого человека
+$person1->addPhoneNumber("8-800-555-35-35");
+$person2->addPhoneNumber("8-800-555-35-36");
+$person3->addPhoneNumber("8-800-555-35-37");
+
+// Создаем несколько объектов класса Group
+$group1 = new Group("Друзья");
+$group2 = new Group("Коллеги");
+
+// Добавляем людей в группы
+$group1->addMember($person1);
+$group1->addMember($person2);
+$group2->addMember($person3);
+
+// Выводим информацию о людях и группах
+echo "Люди:<br>";
+echo $person1->surname . " " . $person1->name . " " . $person1->patronymic . ", " . $person1->birthdate . ", " . $person1->address . "<br>";
+echo "Номера телефонов: ";
+foreach ($person1->phone_numbers as $number) {
+    echo $number . " ";
+}
+echo "<br><br>";
+
+echo $person2->surname . " " . $person2->name . " " . $person2->patronymic . ", " . $person2->birthdate . ", " . $person2->address . "<br>";
+echo "Номера телефонов: ";
+foreach ($person2->phone_numbers as $number) {
+    echo $number . " ";
+}
+echo "<br><br>";
+
+echo $person3->surname . " " . $person3->name . " " . $person3->patronymic . ", " . $person3->birthdate . ", " . $person3->address . "<br>";
+echo "Номера телефонов: ";
+foreach ($person3->phone_numbers as $number) {
+    echo $number . " ";
+}
+echo "<br><br>";
+
+echo "Группы:<br>";
+echo $group1->name . ":<br>";
+foreach ($group1->members as $member) {
+    echo $member->surname . " " . $member->name . " " . $member->patronymic . "<br>";
+}
+echo "<br>";
+
+echo $group2->name . ":<br>";
+foreach ($group2->members as $member) {
+    echo $member->surname . " " . $member->name . " " . $member->patronymic . "<br>";
+}
+
+?>
